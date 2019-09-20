@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -6,6 +6,8 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Chip from '@material-ui/core/Chip';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 // import FaceIcon from '@material-ui/icons/Face';
 
 const useStyles = makeStyles(theme => ({
@@ -15,7 +17,8 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'center'
   },
   flex: {
-    display: 'flex'
+    display: 'flex',
+    alignItems: 'center'
   },
   memberList: {
     width: '30%',
@@ -24,7 +27,8 @@ const useStyles = makeStyles(theme => ({
   },
   chatWindow: {
     width: '70%',
-    height: '300px'
+    height: '300px',
+    padding: '20px'
   },
   chatBox: {
     width: '85%'
@@ -36,6 +40,7 @@ const useStyles = makeStyles(theme => ({
 
 function Dashboard() {
   const classes = useStyles();
+  const [textValue, setTextValue] = useState()
 
   return (
     <div>
@@ -70,7 +75,15 @@ function Dashboard() {
           </div>
         </div>
         <div className={classes.flex}>
-          
+          <TextField
+            label="Send a message."
+            className={classes.chatBox}
+            value={textValue}
+            onChange={e => setTextValue(e.target.value)}
+          />
+          <Button variant="contained" color="primary" className={classes.sendButton}>
+              Send
+          </Button>
         </div>
       </Paper>
     </div>
