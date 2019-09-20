@@ -22,14 +22,15 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center'
   },
   memberList: {
-    width: '15%',
+    width: '30%',
     height: '300px',
-    borderRight: '1px solid black'
+    borderRight: '1px solid black',
   },
   chatWindow: {
-    width: '70%',
+    width: '80%',
     height: '300px',
-    padding: '20px'
+    padding: '1%'
+
   },
   chatBox: {
     width: '65%',
@@ -43,10 +44,14 @@ const useStyles = makeStyles(theme => ({
 
 function Dashboard() {
   const classes = useStyles();
-  const [textValue, setTextValue] = useState();
-  
+
   // CTX Store
-  const [allChats] = useContext(CTX); 
+  const [allChats] = useContext(CTX);
+  const users = Object.keys(allChats);
+
+  // Local State
+  const [activeChat, setActiveChat] = useState(users[0]);
+  const [textValue, setTextValue] = useState('');
 
   return (
     <div>
@@ -55,28 +60,28 @@ function Dashboard() {
           RVNB Member Chat
         </Typography>
         <Typography variant="h5" component="h5">
-          You are now connected.
+          You are now connected with {activeChat}
         </Typography>
         <div className={classes.flex}>
           <div className={classes.memberList}>
             <List>
               {
-                ['Gary', 'Robert'].map(member =>
-                  <ListItem key={member} button>
-                    <ListItemText primary="member" />
+                users.map(user =>
+                  <ListItem onClick={e => setActiveChat(e.target.innerText)} key={user} button>
+                    <ListItemText primary={user} />
                   </ListItem>
                   )
               }
             </List>
           </div>
           <div className={classes.chatWindow}>
-          {
-                [{ from: 'user', msg: 'hello' }].map((chat, index) =>
-                  <div className={classes.flex} key={index} button>
-                    <Chip label={chat.from} className={classes.chip} />
-                    <Typography variant="body1" gutterBottom>{chat.msg}</Typography>
-                  </div>
-                  )
+            {
+              allChats[activeChat].map((chat, index) =>
+                <div className={classes.flex} key={index} button>
+                  <Chip label={chat.from} className={classes.chip} />
+                  <Typography variant="body1" gutterBottom>: {chat.msg}</Typography>
+                </div>
+                )
               }
           </div>
         </div>

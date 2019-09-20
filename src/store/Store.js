@@ -19,12 +19,8 @@ function reducer(state, action) {
     case 'RECEIVE_MESSAGE':
       return {
         ...state,
-        [user]: [
-          ...state[user],
-          {
-            from: from,
-            msg: msg
-          }
+        [user]: [...state[user],
+          {from, msg}
         ]
       }
     default: 
