@@ -1,10 +1,13 @@
 import React from 'react';
 import Dashboard from './components/Dashboard'
+import Store from './store/Store'
 
 function App() {
   return (
     <div>
-      <Dashboard />
+      <Store>
+        <Dashboard />
+      </Store>
     </div>
   );
 }
