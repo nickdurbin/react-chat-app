@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { CTX } from '../store/Store';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -21,7 +22,7 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center'
   },
   memberList: {
-    width: '30%',
+    width: '15%',
     height: '300px',
     borderRight: '1px solid black'
   },
@@ -31,16 +32,21 @@ const useStyles = makeStyles(theme => ({
     padding: '20px'
   },
   chatBox: {
-    width: '85%'
+    width: '65%',
+    margin: '1% 3% 0 17%'
   },
   sendButton: {
-    width: '15%'
+    width: '15%',
+    margin: '1% 2% 0 0'
   },
 }));
 
 function Dashboard() {
   const classes = useStyles();
-  const [textValue, setTextValue] = useState()
+  const [textValue, setTextValue] = useState();
+  
+  // CTX Store
+  const [allChats] = useContext(CTX); 
 
   return (
     <div>
@@ -68,7 +74,7 @@ function Dashboard() {
                 [{ from: 'user', msg: 'hello' }].map((chat, index) =>
                   <div className={classes.flex} key={index} button>
                     <Chip label={chat.from} className={classes.chip} />
-                    <Typography variant="p">{chat.msg}</Typography>
+                    <Typography variant="body1" gutterBottom>{chat.msg}</Typography>
                   </div>
                   )
               }
