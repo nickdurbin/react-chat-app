@@ -6,31 +6,42 @@ import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import Chip from '@material-ui/core/Chip';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-// import FaceIcon from '@material-ui/icons/Face';
+import Chip from '@material-ui/core/Chip';
+import Avatar from '@material-ui/core/Avatar';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    margin: '3rem',
+    margin: '3rem auto',
+    width: '40%',
     padding: theme.spacing(3, 2),
-    textAlign: 'center'
+    textAlign: 'center',
+  },
+  avatar: {
+    backgroundColor: '#E4DFDA',
+    color: ''
+  },
+  chip: {
+    backgroundColor: '#5C9EAD',
+    color: 'white',
+    fontWeight: '600'
   },
   flex: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    padding: '2%',
   },
   memberList: {
-    width: '30%',
+    width: '15%',
     height: '300px',
     borderRight: '1px solid black',
   },
   chatWindow: {
     width: '80%',
     height: '300px',
-    padding: '1%'
-
+    padding: '1%',
+    overflowY: 'scroll'
   },
   chatBox: {
     width: '65%',
@@ -78,8 +89,12 @@ function Dashboard() {
             {
               allChats[activeChat].map((chat, index) =>
                 <div className={classes.flex} key={index} button>
-                  <Chip label={chat.from} className={classes.chip} />
-                  <Typography variant="body1" gutterBottom>: {chat.msg}</Typography>
+                  <Chip 
+                    avatar={<Avatar className={classes.avatar}>RV</Avatar>}
+                    label={chat.from}
+                    className={classes.chip}
+                  />
+                  <Typography variant="body1">: {chat.msg}</Typography>
                 </div>
                 )
               }
