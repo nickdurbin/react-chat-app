@@ -1,4 +1,4 @@
-import React, {useReducer } from 'react';
+import React, { useReducer } from 'react';
 import io from 'socket.io-client';
 
 export const CTX = React.createContext()
